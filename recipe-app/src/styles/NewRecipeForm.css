@@ -1,0 +1,13 @@
+.wrapper {
+    margin: auto;
+    text-align: center;
+}
+label, input, button {
+    margin: 10px;
+}
+
+
+input {
+    width: 25%;
+}
+

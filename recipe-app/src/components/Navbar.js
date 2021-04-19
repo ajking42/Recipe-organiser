@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import styles from "../styles/Navbar.module.css";
 
 function Navbar() {
   const [isExpanded, setExpanded] = useState("false");
@@ -9,21 +10,21 @@ function Navbar() {
     console.log(isExpanded);
   }
   return (
-    <div className="nav-wrapper">
-      <a href="/#" onClick={toggleNav} className="toggle-button">
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
+    <div className={styles['nav-wrapper']}>
+      <a href="/#" onClick={toggleNav} className={styles['toggle-button']}>
+        <span className={styles['bar']}></span>
+        <span className={styles['bar']}></span>
+        <span className={styles['bar']}></span>
       </a>
-      <nav className={`nav-links${isExpanded ? "" : " active"}`}>
+      <nav className={`${styles['nav-links']} ${isExpanded ? "" : styles['active']}`}>
         <ul>
           <li>
-            <NavLink exact className="nav-link" activeClassName='is-active' to="/">
+            <NavLink exact className={styles['nav-link']} activeClassName={styles['is-active']} to="/">
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink exact className="nav-link" activeClassName='is-active' to="/about">
+            <NavLink exact className={styles['nav-link']} activeClassName={styles['is-active']} to="/about">
               About
             </NavLink>
           </li>

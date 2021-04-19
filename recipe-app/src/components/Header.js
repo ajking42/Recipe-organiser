@@ -1,10 +1,10 @@
-import "../styles/Header.css"
+import styles from "../styles/Header.module.css"
 import Navbar from "../components/Navbar";
 
 function Header() {
   return (
-    <div className="header">
-      <div className="site-title">Recipes</div>
+    <div className={styles.header}>
+      <div className={styles.title}>Recipes</div>
       <Navbar />
     </div>
   );

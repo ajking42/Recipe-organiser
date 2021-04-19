@@ -1,16 +1,3 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: white;
-}
-
-.site-title {
-  font-size: 1.5rem;
-  margin: 0.5rem;
-}
-
 .nav-links ul {
   margin: 0;
   padding: 0;
@@ -28,7 +15,7 @@
   padding: 1rem;
 }
 
-.is-active{
+.is-active {
   background-color: rgb(109, 107, 107);
 }
 

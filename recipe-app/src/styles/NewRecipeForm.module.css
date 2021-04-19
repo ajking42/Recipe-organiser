@@ -2,8 +2,9 @@
     margin: auto;
     text-align: center;
 }
+
 label, input, button {
-    margin: 10px;
+    margin: 20px;
 }
 
 

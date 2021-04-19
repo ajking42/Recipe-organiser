@@ -1,4 +1,4 @@
-import "../styles/NewRecipeForm.css";
+import styles from "../styles/NewRecipeForm.module.css";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ function NewRecipeForm() {
   }
 
   return (
-    <div class="wrapper">
+    <div className={styles['wrapper']}>
       <form>
         <label for="url-input">New Recipe URL:</label>
         <input

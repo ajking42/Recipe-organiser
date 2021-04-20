@@ -19,35 +19,60 @@ const RecipeSchema = new mongoose.Schema({
   ingredients: [String],
   instructions: [String],
   image: String,
+  source: String,
 });
 
 const Recipe = new mongoose.model("Recipe", RecipeSchema);
 
 const port = 5000;
 
-app.get("/hello", (req, res) => {
-  res.send("hello!");
+app.get("/getRecipes", (req, res) => {
+  Recipe.find({}, (err, recipes) => {
+    if (err) {
+      console.log("error" + err);
+    } else {
+      console.log(recipes);
+      res.send({ recipes });
+    }
+  });
 });
 
-app.post("/saveNewRecipe", (req, res) => {
+app.post("/queryRecipeURL", (req, res) => {
+  const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
   recipeScraper(req.body.url)
     .then((recipe) => {
-      const newRecipe = new Recipe({
+      let recipeData = {
         name: recipe.name,
         ingredients: recipe.ingredients,
         instructions: recipe.instructions,
         image: recipe.image,
-      });
-
-      newRecipe.save();
-      res.send("Successfully recieved recipe url");
-
+        source: req.body.url,
+      };
+      Recipe.findOneAndUpdate(
+        { source: req.body.url },
+        {
+          $setOnInsert: { recipeData },
+        },
+        options,
+        (error, result) => {
+          if (error) {
+            console.log(error);
+            return;
+          }
+        }
+      );
+      res.send(recipeData);
     })
     .catch((error) => {
       console.log(error);
-      res.send("Unsupported URL")
+      res.send(false);
     });
 });
+
+app.post("/saveRecipe", (req, res) => {
+  
+})
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);

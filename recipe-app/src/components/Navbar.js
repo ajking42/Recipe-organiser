@@ -11,7 +11,7 @@ function Navbar() {
   }
   return (
     <div className={styles['nav-wrapper']}>
-      <a href="/#" onClick={toggleNav} className={styles['toggle-button']}>
+      <a onClick={toggleNav} className={styles['toggle-button']}>
         <span className={styles['bar']}></span>
         <span className={styles['bar']}></span>
         <span className={styles['bar']}></span>
@@ -21,6 +21,11 @@ function Navbar() {
           <li>
             <NavLink exact className={styles['nav-link']} activeClassName={styles['is-active']} to="/">
               Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact className={styles['nav-link']} activeClassName={styles['is-active']} to="/recipelist">
+              Recipes
             </NavLink>
           </li>
           <li>

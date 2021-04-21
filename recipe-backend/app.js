@@ -38,8 +38,6 @@ app.get("/getRecipes", (req, res) => {
 });
 
 app.post("/queryRecipeURL", (req, res) => {
-  const options = { upsert: true, new: true, setDefaultsOnInsert: true };
-
   recipeScraper(req.body.url)
     .then((recipe) => {
       let recipeData = {
@@ -49,19 +47,7 @@ app.post("/queryRecipeURL", (req, res) => {
         image: recipe.image,
         source: req.body.url,
       };
-      Recipe.findOneAndUpdate(
-        { source: req.body.url },
-        {
-          $setOnInsert: { recipeData },
-        },
-        options,
-        (error, result) => {
-          if (error) {
-            console.log(error);
-            return;
-          }
-        }
-      );
+
       res.send(recipeData);
     })
     .catch((error) => {
@@ -71,8 +57,22 @@ app.post("/queryRecipeURL", (req, res) => {
 });
 
 app.post("/saveRecipe", (req, res) => {
-  
-})
+  const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+  Recipe.findOneAndUpdate(
+    { source: req.body.url },
+    {
+      $setOnInsert: req.body,
+    },
+    options,
+    (error, result) => {
+      if (error) {
+        console.log(error);
+        return;
+      }
+    }
+  );
+});
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);

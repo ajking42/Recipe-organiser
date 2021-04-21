@@ -1,6 +1,6 @@
 import styles from "../styles/NewRecipeForm.module.css";
 import React, { useState } from "react";
-import axios from "axios";
+import Axios from "axios";
 
 import RecipeConfirmation from "../components/RecipeConfirmation";
 
@@ -16,7 +16,7 @@ function NewRecipeForm() {
     event.preventDefault();
 
     const data = { url: inputVal };
-    axios
+    Axios
       .post("http://localhost:5000/queryRecipeURL", data)
       .then((response) => {
         console.log("response: " + JSON.stringify(response.data));
@@ -46,6 +46,7 @@ function NewRecipeForm() {
       {recipe && (
         <RecipeConfirmation
           key={recipe.source}
+          source={recipe.source}
           name={recipe.name}
           ingredients={recipe.ingredients}
           instructions={recipe.instructions}
